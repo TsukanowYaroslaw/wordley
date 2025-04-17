@@ -86,4 +86,32 @@ def play_again():
     secretWord = getRandomWord(words)
     return answer, correctLetters, missedLetters, secretWord
 
+#Нужные буквы
+missedLetters = ''
+correctLetters = ''
 
+#Случайное слово
+def getRandomWord(wordlist):
+    return random.choice(wordlist)
+
+secretWord = getRandomWord(words)
+
+#Дисплей
+def  displayBoard(missedLetters, secretWord, correctLetters):
+    print(HANGMAN_PICS[len(missedLetters)])
+    print()
+    print("Неверная буква:", end=" ")
+    for letter in missedLetters:
+        print(letter, end=" ")
+    print()
+
+    blanks = "_"*len(secretWord)
+
+
+    for i in range(len(secretWord)):
+        if secretWord[i] in correctLetters:
+            blanks = blanks[:i] + secretWord[i] + blanks[i + 1:]
+
+    for letter in blanks:
+        print(letter, end=" ")
+    print()
